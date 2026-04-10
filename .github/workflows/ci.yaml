@@ -1,0 +1,42 @@
+# Pipeline de Calidad — Retail App
+# Curso: Fundamentos de DevOps potenciado con IA (CEDIA TMO)
+# Autor: Daniel Banegas
+# Documentación completa: docs/action.md
+
+name: Pipeline de Calidad — Retail App
+
+# Disparadores: push o PR hacia main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Analisis de calidad (simulado)
+        run: |
+          echo "Iniciando análisis de SonarQube simulado..."
+          echo "Revisando HTML y JS..."
+          echo "✅ Código limpio y sin code smells."
+
+      - name: Pruebas unitarias (simulado)
+        run: |
+          echo "Ejecutando tests de la carpeta tests/..."
+          echo "✅ logic.test.js - PASSED"
+          echo "✅ html.test.js - PASSED"
+
+      - name: Probar Secret (API_KEY_RETAIL)
+        env:
+          API_KEY: ${{ secrets.API_KEY_RETAIL }}
+        run: |
+          echo "Probando acceso al secreto..."
+          echo "El secreto es: $API_KEY"
+          echo "✅ Si ves *** arriba, el secreto está protegido."
+
